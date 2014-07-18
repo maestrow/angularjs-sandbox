@@ -1,0 +1,9 @@
+﻿<div ng-controller="ProductList">
+  Products: {{products | json}}!
+  <button ng-click="action('update', {id:1})">Update</button>
+	<button ng-click="action('get', {prodId:1})">get</button>
+	<button ng-click="action('save', {prodId:1, p: {a:1, b:2}})">save</button>
+	<button ng-click="action('query', {prodId:1})">query</button>
+	<button ng-click="action('remove', {prodId:1})">remove</button>
+	<button ng-click="action('delete', {prodId:1})">delete</button>
+</div>
