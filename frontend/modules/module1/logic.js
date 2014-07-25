@@ -1,8 +1,8 @@
-﻿var mod = angular.module('module1', ['ngResource']);
+﻿var mod = angular.module('app', ['ngResource']);
 
 mod.factory('Product', ['$resource', function ($resource) {
 
-	return $resource('/api/products/:prodId', {}, {
+	return $resource('/resource/module1/:prodId.json', {}, {
 		update: {
 			url: '/api/products/update/:id',
 			method: 'PUT',
@@ -11,12 +11,19 @@ mod.factory('Product', ['$resource', function ($resource) {
 	});
 }]);
 
-mod.controller('ProductList', [
-	'$scope', 'Product', function ($scope, Product) {
-		$scope.products = Product.query({ prodId: 1 });
+mod.controller('ProductList', ['$scope', 'Product', 
+	function ($scope, Product) {
+		$scope.products = Product.query({ prodId: 'list' });
 
-		$scope.action = function(actionName, params) {
-			new Product()['$' + actionName](urlParams, bodyParams);
+		$scope.action = function(actionName, urlParams, bodyParams) {
+			new Product()[actionName](urlParams, bodyParams);
+		};
+
+		$scope.change = function() {
+			var prod = Product.get({prodId:1}, function() {
+				prod.abc = true;
+				prod.$save();
+			});
 		};
 	}
 ]);

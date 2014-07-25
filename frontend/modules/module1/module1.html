@@ -1,9 +1,26 @@
 ﻿<div ng-controller="ProductList">
-  Products: {{products | json}}!
-  <button ng-click="action('update', {id:1})">Update</button>
-	<button ng-click="action('get', {prodId:1})">get</button>
-	<button ng-click="action('save', {prodId:1, p: {a:1, b:2}})">save</button>
-	<button ng-click="action('query', {prodId:1})">query</button>
-	<button ng-click="action('remove', {prodId:1})">remove</button>
-	<button ng-click="action('delete', {prodId:1})">delete</button>
+Products: {{products | json}}!
+
+<p/>
+Предопределенные методы русурса:
+<pre>
+{ 
+    'get':    { method:'GET' },
+    'save':   { method:'POST' },
+    'query':  { method:'GET', isArray:true },
+    'remove': { method:'DELETE' },
+    'delete': { method:'DELETE' } 
+};
+</pre>
+<button ng-click="action('$get', { prodId: 1 })">get</button>
+<button ng-click="action('$save', { prodId: 1 }, {a:1, b:2})">save</button>
+<button ng-click="action('$query', { prodId: 1 })">query</button>
+<button ng-click="action('$remove', { prodId: 1 })">remove</button>
+<button ng-click="action('$delete', { prodId: 1 })">delete</button>
+
+<p/>Кастомный метод update:
+<button ng-click="action('$update', { id: 1 }, {a:1, b:2})">update</button>
+
+<p/>Кастомный метод change:
+<button ng-click="change()">change</button>
 </div>
